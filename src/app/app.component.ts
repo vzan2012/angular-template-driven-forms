@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'template-driven-forms';
+  public topics = ['Angular', 'React', 'Vue', 'JavaScript', 'Python', 'Go'];
 }
