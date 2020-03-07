@@ -1,19 +1,67 @@
 <div class="container-fluid tdf-form-container">
   <div class="col-xl-6 offset-xl-3 box-cover">
     <h1>Bootcamp Enrollment Form</h1>
-    <form>
+    <form #userForm="ngForm">
+      {{ userForm.value | json }}
+      <hr />
+      {{ userModel | json }}
+
+      <!-- For ngModelGroup - Testing purposes - Start-->
+      <!-- <div ngModelGroup="address">
+        <div class="form-group">
+          <label for="">Street</label>
+          <input type="text" class="form-control" name="street" ngModel />
+        </div>
+        <div class="form-group">
+          <label for="">City</label>
+          <input type="text" class="form-control" name="city" ngModel />
+        </div>
+        <div class="form-group">
+          <label for="">State</label>
+          <input type="text" class="form-control" name="state" ngModel />
+        </div>
+        <div class="form-group">
+          <label for="">Postal Code</label>
+          <input type="text" class="form-control" name="postalcode" ngModel />
+        </div>
+      </div> -->
+      <!-- For ngModelGroup - Testing purposes - End-->
+
       <div class="form-group">
-        <label for="">Name</label><input type="text" class="form-control" />
+        <label for="">Name</label
+        ><input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="userModel.name"
+        />
       </div>
       <div class="form-group">
-        <label for="">Email</label><input type="email" class="form-control" />
+        <label for="">Email</label
+        ><input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="userModel.email"
+        />
       </div>
       <div class="form-group">
-        <label for="">Phone</label><input type="tel" class="form-control" />
+        <label for="">Phone</label
+        ><input
+          type="tel"
+          class="form-control"
+          name="phone"
+          [(ngModel)]="userModel.phone"
+        />
       </div>
       <div class="form-group mb-3">
         <label for="">I'm interested in</label>
-        <select name="" id="" class="custom-select">
+        <select
+          name="topic"
+          id=""
+          class="custom-select"
+          [(ngModel)]="userModel.topic"
+        >
           <option value="">Select Topic</option>
           <option *ngFor="let topic of topics">{{ topic }}</option>
         </select>
@@ -26,6 +74,7 @@
             class="form-check-input"
             name="timePreference"
             value="morning"
+            [(ngModel)]="userModel.timePreference"
           />
           <label for="" class="form-check-label">Morning 9AM - 12PM</label>
           <input
@@ -33,13 +82,19 @@
             class="form-check-input"
             name="timePreference"
             value="evening"
+            [(ngModel)]="userModel.timePreference"
           />
           <label for="" class="form-check-label">Evening 5PM - 9PM</label>
         </div>
       </div>
 
       <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="subscribe"
+          [(ngModel)]="userModel.subscribe"
+        />
         <label for="" class="form-check-label"
           >Send me professional offers</label
         >
