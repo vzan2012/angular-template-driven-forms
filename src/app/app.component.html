@@ -1,7 +1,19 @@
 <div class="container-fluid tdf-form-container">
   <div class="col-xl-6 offset-xl-3 box-cover">
     <h1>Bootcamp Enrollment Form</h1>
-    <form #userForm="ngForm">
+
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      UnAuthorized
+    </div>
+    <div class="alert alert-success" *ngIf="dataSuccess">
+      You have successfully submitted the form
+    </div>
+    <form
+      #userForm="ngForm"
+      novalidate
+      (ngSubmit)="onSubmit()"
+      *ngIf="!submitted"
+    >
       <div class="form-group">
         <label for="">Name</label
         ><input
@@ -115,7 +127,13 @@
         >
       </div>
 
-      <button class="btn btn-primary" type="submit">Submit Form</button>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!userForm.form.valid || topichasError"
+      >
+        Submit Form
+      </button>
     </form>
   </div>
 </div>
