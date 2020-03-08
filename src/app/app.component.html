@@ -2,69 +2,84 @@
   <div class="col-xl-6 offset-xl-3 box-cover">
     <h1>Bootcamp Enrollment Form</h1>
     <form #userForm="ngForm">
-      {{ userForm.value | json }}
-      <hr />
-      {{ userModel | json }}
-
-      <!-- For ngModelGroup - Testing purposes - Start-->
-      <!-- <div ngModelGroup="address">
-        <div class="form-group">
-          <label for="">Street</label>
-          <input type="text" class="form-control" name="street" ngModel />
-        </div>
-        <div class="form-group">
-          <label for="">City</label>
-          <input type="text" class="form-control" name="city" ngModel />
-        </div>
-        <div class="form-group">
-          <label for="">State</label>
-          <input type="text" class="form-control" name="state" ngModel />
-        </div>
-        <div class="form-group">
-          <label for="">Postal Code</label>
-          <input type="text" class="form-control" name="postalcode" ngModel />
-        </div>
-      </div> -->
-      <!-- For ngModelGroup - Testing purposes - End-->
-
       <div class="form-group">
         <label for="">Name</label
         ><input
+          required
+          #name="ngModel"
           type="text"
           class="form-control"
           name="username"
           [(ngModel)]="userModel.name"
+          [class.is-invalid]="name.invalid && name.touched"
         />
+        <small [class.d-none]="name.valid || name.untouched" class="text-danger"
+          >Name is required</small
+        >
       </div>
       <div class="form-group">
         <label for="">Email</label
         ><input
+          #email="ngModel"
           type="email"
           class="form-control"
           name="email"
           [(ngModel)]="userModel.email"
+          [class.is-invalid]="email.invalid && email.touched"
+          required
         />
+        <div *ngIf="email.errors && email.invalid && email.touched">
+          <small class="text-danger" *ngIf="email.errors.required"
+            >Email is required</small
+          >
+          <!-- <small
+            class="text-danger"
+            *ngIf="email.errors.pattern.requiredPattern"
+            >Enter a valid email address</small
+          > -->
+        </div>
       </div>
       <div class="form-group">
         <label for="">Phone</label
         ><input
+          #phone="ngModel"
           type="tel"
           class="form-control"
           name="phone"
           [(ngModel)]="userModel.phone"
+          [class.is-invalid]="phone.invalid && phone.touched"
+          pattern="^\d{10}$"
+          required
         />
+        <div *ngIf="phone.errors && phone.invalid && phone.touched">
+          <small class="text-danger" *ngIf="phone.errors.required"
+            >Phone number is required</small
+          ><small class="text-danger" *ngIf="phone.errors.pattern"
+            >Phone number must be 10 digits</small
+          >
+        </div>
       </div>
       <div class="form-group mb-3">
         <label for="">I'm interested in</label>
         <select
+          #topic="ngModel"
           name="topic"
           id=""
           class="custom-select"
           [(ngModel)]="userModel.topic"
+          required
+          [class.is-invalid]="topichasError && topic.touched"
+          (blur)="validateTopic(topic.value)"
+          (change)="validateTopic(topic.value)"
         >
-          <option value="">Select Topic</option>
+          <option value="default">Select Topic</option>
           <option *ngFor="let topic of topics">{{ topic }}</option>
         </select>
+        <small
+          class="text-danger"
+          [class.d-none]="!topichasError || topic.untouched"
+          >Please choose a topic</small
+        >
       </div>
       <div class="mb-3">
         <label for="">Time Preference</label>
