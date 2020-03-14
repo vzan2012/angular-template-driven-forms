@@ -1,6 +1,7 @@
 # Angular - TemplateDrivenForms
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+Practised the Angular Template Driven Forms - A Simple User Form designed using Bootstrap 4.
+Project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
 
 ## Development server
 
